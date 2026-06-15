@@ -35,10 +35,6 @@ header{
     box-shadow:0 2px 10px rgba(0,0,0,0.15);
 }
 
-.card h2{
-    margin-top:0;
-}
-
 button{
     background:#2563eb;
     color:white;
@@ -49,22 +45,17 @@ button{
     font-size:18px;
 }
 
-button:hover{
-    opacity:0.9;
-}
-
 #videoPage{
     display:none;
     text-align:center;
     padding:30px;
 }
 
-iframe{
+video{
     width:90%;
     max-width:900px;
-    height:500px;
-    border:none;
     border-radius:15px;
+    background:black;
 }
 </style>
 </head>
@@ -108,12 +99,10 @@ FREE SLAP PREMIUM
 <h1>Loading Your Package...</h1>
 <p>Please wait while your selected package is prepared.</p>
 
-<iframe
-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-title="Video Player"
-allow="autoplay; encrypted-media"
-allowfullscreen>
-</iframe>
+<video id="mainVideo" controls loop playsinline>
+<source src="video.mp4" type="video/mp4">
+Your browser does not support video playback.
+</video>
 
 <br><br>
 
@@ -125,9 +114,18 @@ allowfullscreen>
 function showVideo(){
     document.getElementById("homePage").style.display="none";
     document.getElementById("videoPage").style.display="block";
+
+    const video = document.getElementById("mainVideo");
+    video.muted = false;
+    video.volume = 1;
+    video.play();
 }
 
 function goBack(){
+    const video = document.getElementById("mainVideo");
+    video.pause();
+    video.currentTime = 0;
+
     document.getElementById("videoPage").style.display="none";
     document.getElementById("homePage").style.display="block";
 }
